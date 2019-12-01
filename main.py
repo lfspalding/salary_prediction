@@ -67,8 +67,8 @@ def parse_gdata(input):
     return data
 
 # get data from csv
-ngdata = parse_data('Salaries.csv')
-gdata = parse_gdata('Salaries.csv')
+ngdata = parse_data('V1/Salaries.csv')
+gdata = parse_gdata('V1/Salaries.csv')
 
 # inputs and results
 ngX = []
@@ -87,7 +87,7 @@ for value in gdata:
 ngX = array(ngX)
 print(ngX)
 ngX_encoded = to_categorical(y=ngX, dtype='int16')
-
+print(ngX_encoded.shape)
 
 # separate test data
 ngX_1, ngX_test, ngY_1, ngY_test = train_test_split(ngX_encoded, ngY, test_size=0.15)
@@ -98,7 +98,7 @@ gX_train, gX_val, gY_train, gY_val = train_test_split(gX_1, gY_1, test_size=0.2)
 
 #create sequential model - ng
 model = Sequential()
-model.add(Dense(10, input_dim=1, activation='relu'))
+model.add(Dense(10, input_dim=ngX_encoded.shape[1], activation='sigmoid'))
 #model.add(Dropout(rate=.2))
 for i in range (3):
     model.add(Dense(50, activation='sigmoid'))
@@ -108,8 +108,8 @@ model.compile(optimizer=sgd,
               loss='mean_squared_error',
               metrics=['accuracy'])
 
-batch_size = 6000
-epochs = 100
+batch_size = 15000
+epochs = 10
 
 #give training set to model
 history = model.fit(x=ngX_train, y=ngY_train, batch_size=batch_size, epochs=epochs, verbose=2, validation_data=(ngX_val, ngY_val))
