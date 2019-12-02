@@ -108,8 +108,8 @@ model.compile(optimizer=sgd,
               loss='mean_squared_error',
               metrics=['accuracy'])
 
-batch_size = 15000
-epochs = 10
+batch_size = 10000
+epochs = 25
 
 #give training set to model
 history = model.fit(x=ngX_train, y=ngY_train, batch_size=batch_size, epochs=epochs, verbose=2, validation_data=(ngX_val, ngY_val))
