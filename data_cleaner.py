@@ -8,9 +8,11 @@ def get_gender(row, d):
     gtemp = d.get_gender(name[0])
     if gtemp == 'male' or gtemp == 'mostly_male':
         gender = 'm'
+        print(row)
     elif gtemp == 'female' or gtemp == 'mostly_female':
         gender = 'f'
-    else: gender = 'u'
+    else:
+        gender = 'u'
     return gender
 
 def parse_gdata(input):
@@ -25,8 +27,8 @@ def parse_gdata(input):
     return data
 
 gdata = parse_gdata('Salaries.csv')
-
-with open('cleaned_data.csv', 'w', newline='') as new_csv:
-    writer = csv.writer(new_csv)
-    writer.writerow(['Job','Gender','Base Salary','Total Pay','Year'])
-    writer.writerows(gdata)
+#
+# with open('cleaned_data.csv', 'w', newline='') as new_csv:
+#     writer = csv.writer(new_csv)
+#     writer.writerow(['Job','Gender','Base Salary','Total Pay','Year'])
+#     writer.writerows(gdata)
